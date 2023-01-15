@@ -168,7 +168,7 @@
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">java</span> <span class="string">-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar goods-service-1.0.0-SNAPSHOT.jar</span></span><br></pre></td></tr></table></figure>
 
 <p>这个时候，如果启动出现连接拒绝，首先在服务器telnet ip 端口，发现能够telnet的通，检查发现服务器的内存占用基本快满了，</p>
-<p>上服务器修改nacos的xms参数后，继续启动微服务，发现成功启动。注意服务器放开5005端口。</p>
+<p>上服务器修改nacos的jvm参数后，继续启动微服务，发现成功启动。注意服务器放开5005端口。</p>
 <p>本地启动remote连接后，请求服务器接口。同时idea相应接口打上断点进行测试。</p>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 品牌删除操作</span></span><br><span class="line"><span class="attr">DELETE</span> <span class="string">http://101.34.5.93:8081/brand/14</span></span><br></pre></td></tr></table></figure>
 
