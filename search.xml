@@ -4,13 +4,25 @@
   
     
     <entry>
-      <title></title>
+      <title>Idea远程debug调试</title>
       <link href="/2023/01/15/idea%E8%BF%9C%E7%A8%8Bdenbug%E4%BD%BF%E7%94%A8/"/>
       <url>/2023/01/15/idea%E8%BF%9C%E7%A8%8Bdenbug%E4%BD%BF%E7%94%A8/</url>
       
-        <content type="html"><![CDATA[<h1 id="Idea远程debug调试"><a href="#Idea远程debug调试" class="headerlink" title="Idea远程debug调试"></a>Idea远程debug调试</h1><h3 id="什么是远程调试"><a href="#什么是远程调试" class="headerlink" title="什么是远程调试"></a>什么是远程调试</h3><p>工作中经常会出现测试环境出现bug的情况，但可能本地因为依赖外部第三方的一些接口本地环境无法ping通，导致本地没办法复现测试环境的bug，这时候就需要远程调试了。</p><hr><h3 id="远程调试注意事项"><a href="#远程调试注意事项" class="headerlink" title="远程调试注意事项"></a>远程调试注意事项</h3><p><strong>本地的代码必须和远程服务器上的字节码是同一个版本，保持一致</strong>，否则idea启动远程bug的时候会报错，所以需要提前查看测试环境</p><p>当前的分支和代码版本，本地先进行代码分支切换，保持和测试服务器代码的一致性。</p><p>通常idea打断点失效常见原因</p><ol><li><p>本地与远程代码不一致</p></li><li><p>远程IP,端口配置错误</p></li><li><p>本地源码与二进制代码不一致：实际JVM是基于二进制代码运行的，需要重新编译。(先检查1和2，确认都没有问题，则进行本地代码重现编译后尝试)</p></li></ol><p><strong>使用远程调试时候，打了断点，别的人在测试这个页面的时候是会卡住的</strong>。</p><p><strong>日志不会打印在IDEA的控制台上。System.out 以及 log.info 还是打印在远程的。</strong></p><hr><h3 id="实战演示"><a href="#实战演示" class="headerlink" title="实战演示"></a>实战演示</h3><p>idea配置远程调试，name一般自定义，在公司取名对应不同的测试环境。host及你当前需要连接到哪个环境。</p><p><img src="/images/idea-debug-shezhi.png"></p><p>上传jar到远程服务器，方便演示，这里用的jar就是上一篇商场项目的商品模块-品牌打成的jar。</p><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">scp</span> <span class="string">goods-service-1.0.0-SNAPSHOT.jar root@101.34.5.93:/usr/local</span></span><br></pre></td></tr></table></figure><p>登录服务器，启动jar包</p><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">java</span> <span class="string">-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar goods-service-1.0.0-SNAPSHOT.jar</span></span><br></pre></td></tr></table></figure><p>这个时候，如果启动出现连接拒绝，首先在服务器telnet ip 端口，发现能够telnet的通，检查发现服务器的内存占用基本快满了，</p><p>上服务器修改nacos的xms参数后，继续启动微服务，发现成功启动。注意服务器放开5005端口。</p><p>本地启动remote连接后，请求服务器接口。同时idea相应接口打上断点进行测试。</p><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 品牌删除操作</span></span><br><span class="line"><span class="attr">DELETE</span> <span class="string">http://101.34.5.93:8081/brand/14</span></span><br></pre></td></tr></table></figure><p>发现断点已经进入本地idea中。</p><p><img src="/images/idea-debug-xiaoguo.png"></p><hr>]]></content>
+        <content type="html"><![CDATA[<h1 id="Idea远程debug调试"><a href="#Idea远程debug调试" class="headerlink" title="Idea远程debug调试"></a>Idea远程debug调试</h1><h3 id="什么是远程调试"><a href="#什么是远程调试" class="headerlink" title="什么是远程调试"></a>什么是远程调试</h3><p>工作中经常会出现测试环境出现bug的情况，但可能本地因为依赖外部第三方的一些接口本地环境无法ping通，导致本地没办法复现测试环境的bug，这时候就需要远程调试了。</p><hr><h3 id="远程调试注意事项"><a href="#远程调试注意事项" class="headerlink" title="远程调试注意事项"></a>远程调试注意事项</h3><p><strong>本地的代码必须和远程服务器上的字节码是同一个版本，保持一致</strong>，否则idea启动远程bug的时候会报错，所以需要提前查看测试环境</p><p>当前的分支和代码版本，本地先进行代码分支切换，保持和测试服务器代码的一致性。</p><p>通常idea打断点失效常见原因</p><ol><li>本地与远程代码不一致</li><li>远程IP,端口配置错误</li><li>本地源码与二进制代码不一致：实际JVM是基于二进制代码运行的，需要重新编译。(先检查1和2，确认都没有问题，则进行本地代码重现编译后尝试)</li></ol><p><strong>使用远程调试时候，打了断点，别的人在测试这个页面的时候是会卡住的</strong>。</p><p><strong>日志不会打印在IDEA的控制台上。System.out 以及 log.info 还是打印在远程的。</strong></p><hr><h3 id="实战演示"><a href="#实战演示" class="headerlink" title="实战演示"></a>实战演示</h3><p>idea配置远程调试，name一般自定义，在公司取名对应不同的测试环境。host及你当前需要连接到哪个环境。</p><p><img src="/images/idea-debug-shezhi.png"></p><p>上传jar到远程服务器，方便演示，这里用的jar就是上一篇商场项目的商品模块-品牌打成的jar。</p><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">scp</span> <span class="string">goods-service-1.0.0-SNAPSHOT.jar root@101.34.5.93:/usr/local</span></span><br></pre></td></tr></table></figure><p>登录服务器，启动jar包</p><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">java</span> <span class="string">-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar goods-service-1.0.0-SNAPSHOT.jar</span></span><br></pre></td></tr></table></figure><p>这个时候，如果启动出现连接拒绝，首先在服务器telnet ip 端口，发现能够telnet的通，检查发现服务器的内存占用基本快满了，</p><p>上服务器修改nacos的xms参数后，继续启动微服务，发现成功启动。注意服务器放开5005端口。</p><p>本地启动remote连接后，请求服务器接口。同时idea相应接口打上断点进行测试。</p><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 品牌删除操作</span></span><br><span class="line"><span class="attr">DELETE</span> <span class="string">http://101.34.5.93:8081/brand/14</span></span><br></pre></td></tr></table></figure><p>发现断点已经进入本地idea中。</p><p><img src="/images/idea-debug-xiaoguo.png"></p><hr>]]></content>
       
       
+      <categories>
+          
+          <category> idea </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> idea </tag>
+            
+        </tags>
       
     </entry>
     
