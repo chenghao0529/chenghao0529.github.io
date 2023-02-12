@@ -1,0 +1,269 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>linux安装jdk和tomcat | Chenghao-blog</title><meta name="author" content="程昊"><meta name="copyright" content="程昊"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="jdk和tomcat安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux安装jdk和tomcat">
+<meta property="og:url" content="https://blog.chenghao.work/2023/02/13/linux%E5%AE%89%E8%A3%85jdk%E5%92%8Ctomcat/index.html">
+<meta property="og:site_name" content="Chenghao-blog">
+<meta property="og:description" content="jdk和tomcat安装">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.chenghao.work/images/linux.jpg">
+<meta property="article:published_time" content="2023-02-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-12T16:00:00.000Z">
+<meta property="article:author" content="程昊">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.chenghao.work/images/linux.jpg"><link rel="shortcut icon" href="/images/lufei.jpeg"><link rel="canonical" href="https://blog.chenghao.work/2023/02/13/linux%E5%AE%89%E8%A3%85jdk%E5%92%8Ctomcat/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":600},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'linux安装jdk和tomcat',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-13 00:00:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/lufei.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/linux.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Chenghao-blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">linux安装jdk和tomcat</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-12T16:00:00.000Z" title="发表于 2023-02-13 00:00:00">2023-02-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-12T16:00:00.000Z" title="更新于 2023-02-13 00:00:00">2023-02-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/linux/">linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">437</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="linux安装jdk和tomcat"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="linux环境准备"><a href="#linux环境准备" class="headerlink" title="linux环境准备"></a>linux环境准备</h3><p>拿到一台新的centos7,先准备更新一下yum，安装一下基本命令。</p>
+<p><strong>yum更新</strong>,-y就是对于一下安装操作，系统询问是否，默认是。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update -y</span><br></pre></td></tr></table></figure>
+
+<p><strong>tab命令的自动补全</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install bash-completion</span><br></pre></td></tr></table></figure>
+
+<p><strong>wget</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure>
+
+<p><strong>vim</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install vim-enhanced</span><br></pre></td></tr></table></figure>
+
+<p><strong>网络工具</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install net-tools.x86_64</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="jdk的安装"><a href="#jdk的安装" class="headerlink" title="jdk的安装"></a>jdk的安装</h3><p>1 上官网下载linux版本的jdk，需oracle账号</p>
+<p>jdk8下载: <a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html">https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html</a></p>
+<p>2 上传jdk到linux服务器，先到服务器/usr/local目录，创建目录software/java</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cd</span> <span class="string">/usr/local</span></span><br><span class="line"><span class="attr">mkdir</span> <span class="string">-p software/java</span></span><br></pre></td></tr></table></figure>
+
+<p>3 解压jdk</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tar</span> <span class="string">-zxvf jdk-8u202-linux-x64.tar.gz</span></span><br></pre></td></tr></table></figure>
+
+<p>4 配置环境变量，vim /etc/profile，文件末尾加上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/usr/local/software/java/jdk1.8.0_202</span><br><span class="line">PATH=$JAVA_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
+
+<p>5 重新加载profile文件, 更改的配置立即生效</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">source</span> <span class="string">/etc/profile</span></span><br></pre></td></tr></table></figure>
+
+<p>6 验证java是否配置完成</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">java</span> <span class="string">-version</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="tomcat安装"><a href="#tomcat安装" class="headerlink" title="tomcat安装"></a>tomcat安装</h3><p>1 上官网下载tomcat，地址 <a target="_blank" rel="noopener" href="https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.9/bin">https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.9/bin</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="image/linux%E5%AE%89%E8%A3%85jdk%E5%92%8Ctomcat/1676217887410.png" alt="1676217887410"></p>
+<p>2 上传到linux服务器，进行解压</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tar</span> <span class="string">-zxvf apache-tomcat-8.5.9.tar.gz</span></span><br><span class="line"><span class="attr">mv</span> <span class="string">apache-tomcat-8.5.9 tomcat8</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="image/linux%E5%AE%89%E8%A3%85jdk%E5%92%8Ctomcat/1676217959449.png" alt="1676217959449"></p>
+<p>3 配置环境变量</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">vim</span> <span class="string">/etc/profile</span></span><br></pre></td></tr></table></figure>
+
+<p>输入上面的命令后，shift+g快速将光标定位到最后一行，然后按i，再输入下面代码</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">CATALINA_HOME</span>=<span class="string">/usr/local/software/tomcat/tomcat8</span></span><br></pre></td></tr></table></figure>
+
+<p>4 使环境变量生效</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Source</span> <span class="string">/etc/profile</span></span><br></pre></td></tr></table></figure>
+
+<p>5 启动tomcat</p>
+<p>方式一 进入tomcat的bin目录</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">./startup.sh</span></span><br></pre></td></tr></table></figure>
+
+<p>方式二，任意目录</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sh</span> <span class="string">/usr/local/software/tomcat/tomcat8/bin/startup.sh</span></span><br></pre></td></tr></table></figure>
+
+<p>启动后，访问curl localhost:8080验证是否启动成功</p>
+<p>  <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="image/linux%E5%AE%89%E8%A3%85jdk%E5%92%8Ctomcat/1676218143882.png" alt="1676218143882"></p>
+<p>浏览器访问地址<a target="_blank" rel="noopener" href="http://192.168.134.129:8080/%EF%BC%8C%E5%A6%82%E6%9E%9C%E8%AE%BF%E9%97%AE%E7%A9%BA%E7%99%BD%E9%A1%B5%EF%BC%8C%E5%85%88%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99">http://192.168.134.129:8080/，如果访问空白页，先关闭防火墙</a></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">systemctl</span> <span class="string">stop firewalld.service</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="image/linux%E5%AE%89%E8%A3%85jdk%E5%92%8Ctomcat/1676217926922.png" alt="1676217926922"></p>
+<hr>
+<p>6关闭tomcat</p>
+<p>方式一,进入tomcat的bin目录</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">./shutdonw.sh</span></span><br></pre></td></tr></table></figure>
+
+<p>方式二，任意目录</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sh</span> <span class="string">/usr/local/software/tomcat/tomcat8/bin/startup.sh</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://blog.chenghao.work">程昊</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.chenghao.work/2023/02/13/linux%E5%AE%89%E8%A3%85jdk%E5%92%8Ctomcat/">https://blog.chenghao.work/2023/02/13/linux%E5%AE%89%E8%A3%85jdk%E5%92%8Ctomcat/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.chenghao.work" target="_blank">Chenghao-blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/linux/">linux</a></div><div class="post_share"><div class="social-share" data-image="/images/linux.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/02/12/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/linux.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">linux常用命令</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/02/12/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="linux常用命令"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/linux.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-12</div><div class="title">linux常用命令</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/lufei.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">程昊</div><div class="author-info__description">学海无涯，坚持✊</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/chenghao0529"><i class="fab fa-github"></i><span>代码地址</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/chenghao0529" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/javachenghao@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#linux%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-text">linux环境准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jdk%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-text">jdk的安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tomcat%E5%AE%89%E8%A3%85"><span class="toc-text">tomcat安装</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/02/13/linux%E5%AE%89%E8%A3%85jdk%E5%92%8Ctomcat/" title="linux安装jdk和tomcat"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/linux.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux安装jdk和tomcat"/></a><div class="content"><a class="title" href="/2023/02/13/linux%E5%AE%89%E8%A3%85jdk%E5%92%8Ctomcat/" title="linux安装jdk和tomcat">linux安装jdk和tomcat</a><time datetime="2023-02-12T16:00:00.000Z" title="发表于 2023-02-13 00:00:00">2023-02-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/12/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="linux常用命令"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/linux.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux常用命令"/></a><div class="content"><a class="title" href="/2023/02/12/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="linux常用命令">linux常用命令</a><time datetime="2023-02-11T16:00:00.000Z" title="发表于 2023-02-12 00:00:00">2023-02-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/15/idea%E8%BF%9C%E7%A8%8Bdenbug%E4%BD%BF%E7%94%A8/" title="Idea远程debug调试"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/idea.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Idea远程debug调试"/></a><div class="content"><a class="title" href="/2023/01/15/idea%E8%BF%9C%E7%A8%8Bdenbug%E4%BD%BF%E7%94%A8/" title="Idea远程debug调试">Idea远程debug调试</a><time datetime="2023-01-14T16:00:00.000Z" title="发表于 2023-01-15 00:00:00">2023-01-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/13/%E5%92%95%E6%B3%A1%E4%BA%91%E5%95%86%E5%9F%8E-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%95%86%E5%93%81%E6%A8%A1%E5%9D%97-%E5%93%81%E7%89%8C%E6%A8%A1%E5%9D%97/" title="咕泡云商城-第二章商品模块"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/ysc-banner.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="咕泡云商城-第二章商品模块"/></a><div class="content"><a class="title" href="/2023/01/13/%E5%92%95%E6%B3%A1%E4%BA%91%E5%95%86%E5%9F%8E-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%95%86%E5%93%81%E6%A8%A1%E5%9D%97-%E5%93%81%E7%89%8C%E6%A8%A1%E5%9D%97/" title="咕泡云商城-第二章商品模块">咕泡云商城-第二章商品模块</a><time datetime="2023-01-13T05:44:00.000Z" title="发表于 2023-01-13 13:44:00">2023-01-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/12/%E5%92%95%E6%B3%A1%E4%BA%91%E5%95%86%E5%9F%8E-%E7%AC%AC%E4%B8%80%E7%AB%A0%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/" title="咕泡云商城-第一章项目搭建"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/ysc-banner.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="咕泡云商城-第一章项目搭建"/></a><div class="content"><a class="title" href="/2023/01/12/%E5%92%95%E6%B3%A1%E4%BA%91%E5%95%86%E5%9F%8E-%E7%AC%AC%E4%B8%80%E7%AB%A0%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/" title="咕泡云商城-第一章项目搭建">咕泡云商城-第一章项目搭建</a><time datetime="2023-01-12T04:30:00.000Z" title="发表于 2023-01-12 12:30:00">2023-01-12</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By 程昊</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="30" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="https://blog.chenghao.work/categories/spring/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📚 spring教程 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.chenghao.work/categories/jvm/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🎮 jvm教程 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.chenghao.work/categories/code/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🐱 代码干货 (3)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.chenghao.work/categories/项目实战/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">👩‍💻 项目实战 (2)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.chenghao.work/categories/idea/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📒 idea教程 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.chenghao.work/categories/容器/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">💡 docker&k8s (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.chenghao.work/categories/mq/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🍟 mq教程 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item" style="visibility: hidden"></div><div class="magnet_item" style="visibility: hidden"></div><a class="magnet_link_more"  href="https://blog.chenghao.work/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(33.333333333333336% - 5px);background: #f2f2f2;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #b30070}.magnet_link_more{color:#555}.magnet_link{color:black}.magnet_link:hover{color:white}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2022/12/21/Java编码技巧之高效代码/" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/spring.jpeg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-12-21</span><a class="blog-slider__title" href="2022/12/21/Java编码技巧之高效代码/" alt="">java高效</a><div class="blog-slider__text">写代码应该注意的地方</div><a class="blog-slider__button" href="2022/12/21/Java编码技巧之高效代码/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2022/12/23/Sringboot整合Rabbitmq/" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/rabbitmq.jpeg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-12-23</span><a class="blog-slider__title" href="2022/12/23/Sringboot整合Rabbitmq/" alt="">Springboot整合Rabbitmq</a><div class="blog-slider__text">rabbitmq简单入门看这篇就够啦</div><a class="blog-slider__button" href="2022/12/23/Sringboot整合Rabbitmq/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2022/12/21/docker/" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/docker.jpeg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-12-21</span><a class="blog-slider__title" href="2022/12/21/docker/" alt="">docker基本操作</a><div class="blog-slider__text">docker基本操作</div><a class="blog-slider__button" href="2022/12/21/docker/" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body></html>
