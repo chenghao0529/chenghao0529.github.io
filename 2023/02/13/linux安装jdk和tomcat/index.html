@@ -182,11 +182,11 @@
 
 <hr>
 <h3 id="tomcat安装"><a href="#tomcat安装" class="headerlink" title="tomcat安装"></a>tomcat安装</h3><p>1 上官网下载tomcat，地址 <a target="_blank" rel="noopener" href="https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.9/bin">https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.9/bin</a></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/Users/chenghao/blog/source/images/tomcat-linux.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/tomcat-linux.jpg"></p>
 <p>2 上传到linux服务器，进行解压</p>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tar</span> <span class="string">-zxvf apache-tomcat-8.5.9.tar.gz</span></span><br><span class="line"><span class="attr">mv</span> <span class="string">apache-tomcat-8.5.9 tomcat8</span></span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/Users/chenghao/blog/source/images/tomcat-jieya.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/tomcat-jieya.png"></p>
 <p>3 配置环境变量</p>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">vim</span> <span class="string">/etc/profile</span></span><br></pre></td></tr></table></figure>
 
@@ -204,11 +204,11 @@
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sh</span> <span class="string">/usr/local/software/tomcat/tomcat8/bin/startup.sh</span></span><br></pre></td></tr></table></figure>
 
 <p>启动后，访问curl localhost:8080验证是否启动成功</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/Users/chenghao/blog/source/images/tomcat-curl.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/tomcat-curl.jpg"></p>
 <p>浏览器访问地址<a target="_blank" rel="noopener" href="http://192.168.134.129:8080/%EF%BC%8C%E5%A6%82%E6%9E%9C%E8%AE%BF%E9%97%AE%E7%A9%BA%E7%99%BD%E9%A1%B5%EF%BC%8C%E5%85%88%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99">http://192.168.134.129:8080/，如果访问空白页，先关闭防火墙</a></p>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">systemctl</span> <span class="string">stop firewalld.service</span></span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/Users/chenghao/blog/source/images/tomcat-fangwen.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/tomcat-fangwen.jpg"></p>
 <hr>
 <p>6关闭tomcat</p>
 <p>方式一,进入tomcat的bin目录</p>
