@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Linux安装Mysql | Chenghao-blog</title><meta name="author" content="程昊"><meta name="copyright" content="程昊"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="mysql的安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux安装Mysql">
+<meta property="og:url" content="https://blog.chenghao.work/2023/02/19/linux%20%E4%B8%8B%E5%AE%89%E8%A3%85%20MySQL/index.html">
+<meta property="og:site_name" content="Chenghao-blog">
+<meta property="og:description" content="mysql的安装">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.chenghao.work/images/linux.jpg">
+<meta property="article:published_time" content="2023-02-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-18T16:00:00.000Z">
+<meta property="article:author" content="程昊">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.chenghao.work/images/linux.jpg"><link rel="shortcut icon" href="/images/lufei.jpeg"><link rel="canonical" href="https://blog.chenghao.work/2023/02/19/linux%20%E4%B8%8B%E5%AE%89%E8%A3%85%20MySQL/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":600},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Linux安装Mysql',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-19 00:00:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/lufei.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/linux.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Chenghao-blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux安装Mysql</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-18T16:00:00.000Z" title="发表于 2023-02-19 00:00:00">2023-02-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-18T16:00:00.000Z" title="更新于 2023-02-19 00:00:00">2023-02-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/linux/">linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">730</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Linux安装Mysql"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Linux安装Mysql"><a href="#Linux安装Mysql" class="headerlink" title="Linux安装Mysql"></a>Linux安装Mysql</h2><h3 id="1-卸载老版本-MySQL"><a href="#1-卸载老版本-MySQL" class="headerlink" title="1 卸载老版本 MySQL"></a>1 卸载老版本 MySQL</h3><p>查找并删除 mysql 有关的文件</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">find</span> <span class="string">/ -name mysql</span></span><br><span class="line"><span class="attr">rm</span> <span class="string">-rf 上边查找到的路径，多个路径用空格隔开</span></span><br><span class="line"><span class="comment">#或者下边一条命令即可</span></span><br><span class="line"><span class="attr">find</span> <span class="string">/ -name mysql|xargs rm -rf</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230218123932.png"></p>
+<hr>
+<h3 id="2-下载mysql-linux版本，进行解压"><a href="#2-下载mysql-linux版本，进行解压" class="headerlink" title="2 下载mysql-linux版本，进行解压"></a>2 下载mysql-linux版本，进行解压</h3><p>去官网下载mysql后上传到服务器进行解压。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf mysql-8.0.31-linux-glibc2.12-x86_64.tar.xz</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230219223905.png"></p>
+<hr>
+<h3 id="3-重命名解压后的文件"><a href="#3-重命名解压后的文件" class="headerlink" title="3 重命名解压后的文件"></a>3 重命名解压后的文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv mysql-8.0.31-linux-glibc2.12-x86_64 mysql8</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="4-添加-mysql-用户组和-mysql-用户"><a href="#4-添加-mysql-用户组和-mysql-用户" class="headerlink" title="4 添加 mysql 用户组和 mysql 用户"></a>4 添加 mysql 用户组和 mysql 用户</h3><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">groupadd</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">useradd</span> <span class="string">-r -g mysql mysql</span></span><br></pre></td></tr></table></figure>
+
+<p>如果已经添加过，则会提示组合用户已经存在</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230219224054.png"></p>
+<hr>
+<h3 id="5-进入-mysql-目录新建data，logs目录并更改权限"><a href="#5-进入-mysql-目录新建data，logs目录并更改权限" class="headerlink" title="5 进入 mysql 目录新建data，logs目录并更改权限"></a>5 进入 mysql 目录新建data，logs目录并更改权限</h3><p>mysql8版本，<strong>不需要建data目录</strong>，后续会报错。–踩坑了</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cd</span> <span class="string">mysql/</span></span><br><span class="line"><span class="attr">mkdir</span> <span class="string">data logs</span></span><br><span class="line"><span class="attr">chown</span> <span class="string">-R mysql:mysql ./</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230219230535.png"></p>
+<hr>
+<h3 id="6-编辑my-cnf-vim-etc-my-cnf"><a href="#6-编辑my-cnf-vim-etc-my-cnf" class="headerlink" title="6 编辑my.cnf    vim /etc/my.cnf"></a>6 编辑my.cnf    vim /etc/my.cnf</h3><p><strong>此处socket修改为/tmp/mysql.sock</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">[mysqld]</span></span><br><span class="line"><span class="attr">server-id</span>=<span class="string">1</span></span><br><span class="line"><span class="attr">port</span>=<span class="string">3306</span></span><br><span class="line"><span class="attr">user</span>=<span class="string">mysql</span></span><br><span class="line"><span class="attr">basedir</span>=<span class="string">/usr/local/software/mysql/mysql8</span></span><br><span class="line"><span class="comment">#设置 mysql数据库的数据的存放目录，MySQL 8+ 不需要以下配置，系统自己生成即可，否则有可能报错</span></span><br><span class="line"><span class="comment">#datadir=/usr/local/software/mysql/mysql8/data</span></span><br><span class="line"><span class="comment"># 修改为/tmp/mysql.sock，踩坑了</span></span><br><span class="line"><span class="attr">socket</span>=<span class="string">/usr/local/software/mysql/mysql8/mysql.sock</span></span><br><span class="line"><span class="attr">pid-file</span>=<span class="string">/usr/local/software/mysql/mysql8/mysql.pid</span></span><br><span class="line"><span class="attr">character-set-server</span>=<span class="string">utf8mb4</span></span><br><span class="line"><span class="attr">innodb_log_file_size</span>=<span class="string">1G</span></span><br><span class="line"><span class="attr">default-storage-engine</span>=<span class="string">INNODB</span></span><br><span class="line"><span class="attr">default_authentication_plugin</span>=<span class="string">mysql_native_password</span></span><br><span class="line"><span class="attr">log-error</span>=<span class="string">/usr/local/software/mysql/mysql8/logs/error.log</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="attr">[client]</span></span><br><span class="line"><span class="attr">port</span>=<span class="string">3306</span></span><br><span class="line"><span class="attr">socket</span>=<span class="string">/usr/local/software/mysql/mysql8/mysql.sock</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="7-启动mysql-进入bin目录，安装mysql"><a href="#7-启动mysql-进入bin目录，安装mysql" class="headerlink" title="7 启动mysql,进入bin目录，安装mysql"></a>7 启动mysql,进入bin目录，安装mysql</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230219231811.png"></p>
+<hr>
+<h3 id="8-解决异常"><a href="#8-解决异常" class="headerlink" title="8 解决异常"></a>8 解决异常</h3><h5 id="The-newly-created-data-directory-usr-local-software-mysql-mysql8-data-by-–initialize-is-unusable-You-can-remove-it"><a href="#The-newly-created-data-directory-usr-local-software-mysql-mysql8-data-by-–initialize-is-unusable-You-can-remove-it" class="headerlink" title="The newly created data directory /usr/local/software/mysql/mysql8/data/ by –initialize is unusable. You can remove it."></a>The newly created data directory /usr/local/software/mysql/mysql8/data/ by –initialize is unusable. You can remove it.</h5><p>解决办法：my.cnf中，去除#datadir配置，mysql8之后自己会生成，无需指定。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\程昊\AppData\Roaming\Typora\typora-user-images\image-20230220000809904.png" alt="image-20230220000809904"></p>
+<h5 id="ERROR-2002-HY000-Can’t-connect-to-local-MySQL-server-through-socket-‘-tmp-mysql-sock’-2"><a href="#ERROR-2002-HY000-Can’t-connect-to-local-MySQL-server-through-socket-‘-tmp-mysql-sock’-2" class="headerlink" title="ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/tmp/mysql.sock’ (2)"></a>ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/tmp/mysql.sock’ (2)</h5><p>解决方法：my.cnf中的socket路径，做一次ln映射</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ln</span> <span class="string">-s /usr/local/software/mysql/mysql8/mysql.sock /tmp/mysql.sock</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="9-启动mysql"><a href="#9-启动mysql" class="headerlink" title="9 启动mysql"></a>9 启动mysql</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230220002716.png"></p>
+<hr>
+<h3 id="10-查看初始化密码，登录修改初始化密码"><a href="#10-查看初始化密码，登录修改初始化密码" class="headerlink" title="10 查看初始化密码，登录修改初始化密码"></a>10 查看初始化密码，登录修改初始化密码</h3><p>由于在 my.cnf 中已经指定了 log error 的路径，因此初始化的过程中所有的输出包括密码都保存在了指定的路径和log文件中，进入logs目录查找密码。如果复制密码还显示密码错误，查看一下error.log的启动日志，可能登录使用空密码即可。</p>
+<p>cat error.log | grep “password”</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230219232604.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230220003717.png"></p>
+<hr>
+<h3 id="11-更新mysql路径"><a href="#11-更新mysql路径" class="headerlink" title="11 更新mysql路径"></a>11 更新mysql路径</h3><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">vim</span> <span class="string">/etc/profile    //全局</span></span><br><span class="line"><span class="attr">export</span> <span class="string">PATH=$PATH:/usr/local/software/mysql/mysql8/bin</span></span><br><span class="line"><span class="comment">#修改完，刷新生效</span></span><br><span class="line"><span class="attr">source</span> <span class="string">/etc/profile </span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230220004213.png"></p>
+<hr>
+<h3 id="12-修改初始化密码"><a href="#12-修改初始化密码" class="headerlink" title="12 修改初始化密码"></a>12 修改初始化密码</h3><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ALTER</span> <span class="string">USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;123456&#x27;;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230220004430.png"></p>
+<hr>
+<h3 id="13-开机自启动mysql设置"><a href="#13-开机自启动mysql设置" class="headerlink" title="13 开机自启动mysql设置"></a>13 开机自启动mysql设置</h3><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cp</span> <span class="string">/usr/local/software/mysql/mysql8/support-files/mysql.server /etc/init.d/mysql</span></span><br><span class="line"><span class="attr">chmod</span> <span class="string">+x /etc/init.d/mysql</span></span><br><span class="line"><span class="attr">chkconfig</span> <span class="string">--add mysql</span></span><br><span class="line"><span class="attr">chkconfig</span> <span class="string">--level 345 mysql on</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230220004923.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230220010911.png"></p>
+<hr>
+<h3 id="14-增加远程登录权限"><a href="#14-增加远程登录权限" class="headerlink" title="14 增加远程登录权限"></a>14 增加远程登录权限</h3><p>上一步即可本地登录，但远程登录会报错</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230220005516.png"></p>
+<p>为解决这一问题，需要本地登陆 MySQL 后执行如下命令</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">使用mysql库：use</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">查询信息：select</span> <span class="string">user,host from user</span></span><br><span class="line"><span class="attr">修改root用户的host字段，命令：update</span> <span class="string">user set host=&quot;%&quot; where user=&quot;root&quot;</span></span><br><span class="line"><span class="attr">使本次修改立即生效，命令：flush</span> <span class="string">privileges</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230220010700.png"></p>
+<p>重新测试远程连接</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230220010736.png"></p>
+<hr>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://blog.chenghao.work">程昊</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.chenghao.work/2023/02/19/linux%20%E4%B8%8B%E5%AE%89%E8%A3%85%20MySQL/">https://blog.chenghao.work/2023/02/19/linux%20%E4%B8%8B%E5%AE%89%E8%A3%85%20MySQL/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.chenghao.work" target="_blank">Chenghao-blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/linux/">linux</a></div><div class="post_share"><div class="social-share" data-image="/images/linux.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/02/13/linux%E5%AE%89%E8%A3%85jdk%E5%92%8Ctomcat/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/linux.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">linux安装jdk和tomcat</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/02/12/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="linux常用命令"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/linux.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-12</div><div class="title">linux常用命令</div></div></a></div><div><a href="/2023/02/13/linux%E5%AE%89%E8%A3%85jdk%E5%92%8Ctomcat/" title="linux安装jdk和tomcat"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/linux.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-13</div><div class="title">linux安装jdk和tomcat</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/lufei.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">程昊</div><div class="author-info__description">学海无涯，坚持✊</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/chenghao0529"><i class="fab fa-github"></i><span>代码地址</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/chenghao0529" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/javachenghao@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E5%AE%89%E8%A3%85Mysql"><span class="toc-text">Linux安装Mysql</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%8D%B8%E8%BD%BD%E8%80%81%E7%89%88%E6%9C%AC-MySQL"><span class="toc-text">1 卸载老版本 MySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%8B%E8%BD%BDmysql-linux%E7%89%88%E6%9C%AC%EF%BC%8C%E8%BF%9B%E8%A1%8C%E8%A7%A3%E5%8E%8B"><span class="toc-text">2 下载mysql-linux版本，进行解压</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%87%8D%E5%91%BD%E5%90%8D%E8%A7%A3%E5%8E%8B%E5%90%8E%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-text">3 重命名解压后的文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%B7%BB%E5%8A%A0-mysql-%E7%94%A8%E6%88%B7%E7%BB%84%E5%92%8C-mysql-%E7%94%A8%E6%88%B7"><span class="toc-text">4 添加 mysql 用户组和 mysql 用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%BF%9B%E5%85%A5-mysql-%E7%9B%AE%E5%BD%95%E6%96%B0%E5%BB%BAdata%EF%BC%8Clogs%E7%9B%AE%E5%BD%95%E5%B9%B6%E6%9B%B4%E6%94%B9%E6%9D%83%E9%99%90"><span class="toc-text">5 进入 mysql 目录新建data，logs目录并更改权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%BC%96%E8%BE%91my-cnf-vim-etc-my-cnf"><span class="toc-text">6 编辑my.cnf    vim &#x2F;etc&#x2F;my.cnf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%90%AF%E5%8A%A8mysql-%E8%BF%9B%E5%85%A5bin%E7%9B%AE%E5%BD%95%EF%BC%8C%E5%AE%89%E8%A3%85mysql"><span class="toc-text">7 启动mysql,进入bin目录，安装mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E8%A7%A3%E5%86%B3%E5%BC%82%E5%B8%B8"><span class="toc-text">8 解决异常</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#The-newly-created-data-directory-usr-local-software-mysql-mysql8-data-by-%E2%80%93initialize-is-unusable-You-can-remove-it"><span class="toc-text">The newly created data directory &#x2F;usr&#x2F;local&#x2F;software&#x2F;mysql&#x2F;mysql8&#x2F;data&#x2F; by –initialize is unusable. You can remove it.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ERROR-2002-HY000-Can%E2%80%99t-connect-to-local-MySQL-server-through-socket-%E2%80%98-tmp-mysql-sock%E2%80%99-2"><span class="toc-text">ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘&#x2F;tmp&#x2F;mysql.sock’ (2)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E5%90%AF%E5%8A%A8mysql"><span class="toc-text">9 启动mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E6%9F%A5%E7%9C%8B%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AF%86%E7%A0%81%EF%BC%8C%E7%99%BB%E5%BD%95%E4%BF%AE%E6%94%B9%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AF%86%E7%A0%81"><span class="toc-text">10 查看初始化密码，登录修改初始化密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E6%9B%B4%E6%96%B0mysql%E8%B7%AF%E5%BE%84"><span class="toc-text">11 更新mysql路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E4%BF%AE%E6%94%B9%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AF%86%E7%A0%81"><span class="toc-text">12 修改初始化密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8mysql%E8%AE%BE%E7%BD%AE"><span class="toc-text">13 开机自启动mysql设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E5%A2%9E%E5%8A%A0%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%E6%9D%83%E9%99%90"><span class="toc-text">14 增加远程登录权限</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/02/19/linux%20%E4%B8%8B%E5%AE%89%E8%A3%85%20MySQL/" title="Linux安装Mysql"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/linux.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux安装Mysql"/></a><div class="content"><a class="title" href="/2023/02/19/linux%20%E4%B8%8B%E5%AE%89%E8%A3%85%20MySQL/" title="Linux安装Mysql">Linux安装Mysql</a><time datetime="2023-02-18T16:00:00.000Z" title="发表于 2023-02-19 00:00:00">2023-02-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/13/linux%E5%AE%89%E8%A3%85jdk%E5%92%8Ctomcat/" title="linux安装jdk和tomcat"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/linux.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux安装jdk和tomcat"/></a><div class="content"><a class="title" href="/2023/02/13/linux%E5%AE%89%E8%A3%85jdk%E5%92%8Ctomcat/" title="linux安装jdk和tomcat">linux安装jdk和tomcat</a><time datetime="2023-02-12T16:00:00.000Z" title="发表于 2023-02-13 00:00:00">2023-02-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/12/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="linux常用命令"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/linux.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux常用命令"/></a><div class="content"><a class="title" href="/2023/02/12/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="linux常用命令">linux常用命令</a><time datetime="2023-02-11T16:00:00.000Z" title="发表于 2023-02-12 00:00:00">2023-02-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/15/idea%E8%BF%9C%E7%A8%8Bdenbug%E4%BD%BF%E7%94%A8/" title="Idea远程debug调试"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/idea.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Idea远程debug调试"/></a><div class="content"><a class="title" href="/2023/01/15/idea%E8%BF%9C%E7%A8%8Bdenbug%E4%BD%BF%E7%94%A8/" title="Idea远程debug调试">Idea远程debug调试</a><time datetime="2023-01-14T16:00:00.000Z" title="发表于 2023-01-15 00:00:00">2023-01-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/13/%E5%92%95%E6%B3%A1%E4%BA%91%E5%95%86%E5%9F%8E-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%95%86%E5%93%81%E6%A8%A1%E5%9D%97-%E5%93%81%E7%89%8C%E6%A8%A1%E5%9D%97/" title="咕泡云商城-第二章商品模块"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/ysc-banner.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="咕泡云商城-第二章商品模块"/></a><div class="content"><a class="title" href="/2023/01/13/%E5%92%95%E6%B3%A1%E4%BA%91%E5%95%86%E5%9F%8E-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%95%86%E5%93%81%E6%A8%A1%E5%9D%97-%E5%93%81%E7%89%8C%E6%A8%A1%E5%9D%97/" title="咕泡云商城-第二章商品模块">咕泡云商城-第二章商品模块</a><time datetime="2023-01-13T05:44:00.000Z" title="发表于 2023-01-13 13:44:00">2023-01-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By 程昊</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="30" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="https://blog.chenghao.work/categories/spring/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📚 spring教程 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.chenghao.work/categories/jvm/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🎮 jvm教程 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.chenghao.work/categories/code/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🐱 代码干货 (3)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.chenghao.work/categories/项目实战/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">👩‍💻 项目实战 (2)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.chenghao.work/categories/idea/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📒 idea教程 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.chenghao.work/categories/容器/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">💡 docker&k8s (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://blog.chenghao.work/categories/mq/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🍟 mq教程 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item" style="visibility: hidden"></div><div class="magnet_item" style="visibility: hidden"></div><a class="magnet_link_more"  href="https://blog.chenghao.work/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(33.333333333333336% - 5px);background: #f2f2f2;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #b30070}.magnet_link_more{color:#555}.magnet_link{color:black}.magnet_link:hover{color:white}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2022/12/21/Java编码技巧之高效代码/" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/spring.jpeg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-12-21</span><a class="blog-slider__title" href="2022/12/21/Java编码技巧之高效代码/" alt="">java高效</a><div class="blog-slider__text">写代码应该注意的地方</div><a class="blog-slider__button" href="2022/12/21/Java编码技巧之高效代码/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2022/12/23/Sringboot整合Rabbitmq/" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/rabbitmq.jpeg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-12-23</span><a class="blog-slider__title" href="2022/12/23/Sringboot整合Rabbitmq/" alt="">Springboot整合Rabbitmq</a><div class="blog-slider__text">rabbitmq简单入门看这篇就够啦</div><a class="blog-slider__button" href="2022/12/23/Sringboot整合Rabbitmq/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2022/12/21/docker/" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/docker.jpeg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-12-21</span><a class="blog-slider__title" href="2022/12/21/docker/" alt="">docker基本操作</a><div class="blog-slider__text">docker基本操作</div><a class="blog-slider__button" href="2022/12/21/docker/" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body></html>
