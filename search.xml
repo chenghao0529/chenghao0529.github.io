@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>linux安装nginx</title>
+      <link href="/2023/02/22/linux%E5%AE%89%E8%A3%85nginx/"/>
+      <url>/2023/02/22/linux%E5%AE%89%E8%A3%85nginx/</url>
+      
+        <content type="html"><![CDATA[<h3 id="linux安装nginx"><a href="#linux安装nginx" class="headerlink" title="linux安装nginx"></a>linux安装nginx</h3><p><strong>1. 安装依赖包</strong></p><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">yum</span> <span class="string">-y install gcc zlib zlib-devel pcre-devel openssl openssl-devel</span></span><br></pre></td></tr></table></figure><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230221163434.png"></p><hr><p><strong>2. 下载并解压安装包</strong></p><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">//创建一个文件夹</span></span><br><span class="line"><span class="attr">cd</span> <span class="string">/usr/local/software</span></span><br><span class="line"><span class="attr">mkdir</span> <span class="string">nginx</span></span><br><span class="line"><span class="attr">cd</span> <span class="string">nginx</span></span><br><span class="line"><span class="attr">//下载tar包</span></span><br><span class="line"><span class="attr">wget</span> <span class="string">http://nginx.org/download/nginx-1.13.7.tar.gz</span></span><br><span class="line"><span class="attr">tar</span> <span class="string">-xvf nginx-1.13.7.tar.gz</span></span><br><span class="line"><span class="attr">mv</span> <span class="string">nginx-1.13.7 nginx</span></span><br></pre></td></tr></table></figure><hr><p><strong>3. 安装 nginx</strong></p><p>如果不指定：/configure  –prefix，安装的nginx在/usr/local/nginx目录下</p><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">//进入目录</span></span><br><span class="line"><span class="attr">cd</span> <span class="string">nginx-1.13.7</span></span><br><span class="line"><span class="attr">//执行命令</span> <span class="string">考虑到后续安装ssl证书 添加两个模块</span></span><br><span class="line"><span class="attr">./configure</span>  <span class="string">--prefix=/usr/local/software/nginx/nginx</span></span><br><span class="line"><span class="attr">//执行make命令</span></span><br><span class="line"><span class="attr">make</span></span><br><span class="line"><span class="attr">//执行make</span> <span class="string">install命令</span></span><br><span class="line"><span class="attr">make</span> <span class="string">install</span></span><br></pre></td></tr></table></figure><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230221165009.png"></p><hr><p><strong>4. 启动 nginx 服务</strong></p><p>如果启动失败，提示打不开logs下面的error.log,则根据提示在对应目录新建logs目录</p><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">./sbin/nginx</span> <span class="string">-c ./conf/nginx.conf</span></span><br></pre></td></tr></table></figure><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230221170958.png"></p><p>访问对应ip出现nginx，则启动成功。</p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230221172711.png"></p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linux安装Mysql</title>
       <link href="/2023/02/19/linux%20%E4%B8%8B%E5%AE%89%E8%A3%85%20MySQL/"/>
       <url>/2023/02/19/linux%20%E4%B8%8B%E5%AE%89%E8%A3%85%20MySQL/</url>
