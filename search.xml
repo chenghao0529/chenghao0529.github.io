@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>linux部署前后端项目，开启远程debug</title>
+      <link href="/2023/02/23/linux%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%BC%80%E5%90%AF%E8%BF%9C%E7%AB%AFdebug/"/>
+      <url>/2023/02/23/linux%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%BC%80%E5%90%AF%E8%BF%9C%E7%AB%AFdebug/</url>
+      
+        <content type="html"><![CDATA[<h3 id="linux部署前后端项目，开启远程debug"><a href="#linux部署前后端项目，开启远程debug" class="headerlink" title="linux部署前后端项目，开启远程debug"></a>linux部署前后端项目，开启远程debug</h3><h4 id="修改nginx配置"><a href="#修改nginx配置" class="headerlink" title="修改nginx配置"></a>修改nginx配置</h4><p>修改nginx.conf文件，配置前端后端项目路径</p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230223202904.png"></p><hr><h4 id="配置tomcat"><a href="#配置tomcat" class="headerlink" title="配置tomcat"></a>配置tomcat</h4><ol><li>在conf目录下，修改server.xml配置文件，找到/Host 标签，在前面加上，重启项目即可正常启动。</li></ol><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&lt;Context</span> <span class="string">docBase=&quot;/usr/local/project/xxx项目&quot; path=&quot;/demo&quot;  reloadable=&quot;true&quot; &gt;&lt;/Context&gt;</span></span><br></pre></td></tr></table></figure><ol start="2"><li>配置远程debug参数，修改bin目录下面的catalina.sh文件，在文件的第一行加上</li></ol><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">CATALINA_OPTS</span>=<span class="string">&quot;-Xdebug -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=n&quot;</span></span><br></pre></td></tr></table></figure><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230223204141.png"></p><ol start="3"><li>启动tomcat，查看tomcat，发现成功带上了参数</li></ol><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230223204313.png"></p><hr><h4 id="配置IDEA远程连接"><a href="#配置IDEA远程连接" class="headerlink" title="配置IDEA远程连接"></a>配置IDEA远程连接</h4><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230223204404.png"></p><p>尝试连接，出现Connected to the target VM, address: ‘192.168.134.133:5005’, transport: ‘socket’表明连接成功</p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230223204506.png"></p><hr><h4 id="Idea安装插件-RestfulTool"><a href="#Idea安装插件-RestfulTool" class="headerlink" title="Idea安装插件 RestfulTool"></a>Idea安装插件 RestfulTool</h4><p>安装完restfulTool后,可以快速定位项目接口代码位置。方便断电调试</p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230223204828.png"></p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>linux安装nginx</title>
       <link href="/2023/02/22/linux%E5%AE%89%E8%A3%85nginx/"/>
       <url>/2023/02/22/linux%E5%AE%89%E8%A3%85nginx/</url>
