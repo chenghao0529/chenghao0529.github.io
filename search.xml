@@ -54,6 +54,31 @@
     
     
     <entry>
+      <title>window11 tomcat开机自启动</title>
+      <link href="/2023/02/25/Window11%20Tomcat%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/"/>
+      <url>/2023/02/25/Window11%20Tomcat%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/</url>
+      
+        <content type="html"><![CDATA[<h3 id="window11-tomcat开机自启动"><a href="#window11-tomcat开机自启动" class="headerlink" title="window11 tomcat开机自启动"></a>window11 tomcat开机自启动</h3><h4 id="1-tomcat-版本选择"><a href="#1-tomcat-版本选择" class="headerlink" title="1 tomcat 版本选择"></a>1 tomcat 版本选择</h4><p><strong>推荐使用Tomcat7以上版本</strong>，<a href="https://so.csdn.net/so/search?q=Tomcat7&spm=1001.2101.3001.7020">Tomcat7</a>版本的bin目录下没有service.bat文件，无法将Tomcat添加到服务中。</p><hr><h4 id="2-进入tomcat的bin目录，输入cmd，然后将service拖入window命令窗口，会提示service的语法。"><a href="#2-进入tomcat的bin目录，输入cmd，然后将service拖入window命令窗口，会提示service的语法。" class="headerlink" title="2 进入tomcat的bin目录，输入cmd，然后将service拖入window命令窗口，会提示service的语法。"></a>2 进入tomcat的bin目录，输入cmd，然后将service拖入window命令窗口，会提示service的语法。</h4><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230226113712.png"></p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230226113924.png"></p><hr><h4 id="3-在-bin-目录下执行-service-bat-install-Tomcat，打包服务"><a href="#3-在-bin-目录下执行-service-bat-install-Tomcat，打包服务" class="headerlink" title="3 在 bin 目录下执行 service.bat install Tomcat，打包服务"></a>3 在 bin 目录下执行 service.bat install Tomcat，打包服务</h4><p>service.bat install tomcat8 (install 后面的名字可随意 建议 tomcat + 版本号即可)</p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230226114229.png"></p><h4 id="4-查看服务"><a href="#4-查看服务" class="headerlink" title="4 查看服务"></a>4 查看服务</h4><p>输入services.msc,弹出服务，可键盘按a，找到tomcat</p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230226114417.png"></p><hr><h4 id="5-将-tomcat-服务设置为开机自启动"><a href="#5-将-tomcat-服务设置为开机自启动" class="headerlink" title="5 将 tomcat 服务设置为开机自启动"></a>5 将 tomcat 服务设置为开机自启动</h4><p>右键 tomcat 服务&gt;属性&gt;启动类型设置为自动&gt;应用&gt;确定</p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230226114627.png"></p><p>这样 tomcat 就开机自启动了。</p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230226114846.png"></p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> window </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> tomcat </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>window11 nginx开机自启动</title>
       <link href="/2023/02/25/Window11%20Nginx%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/"/>
       <url>/2023/02/25/Window11%20Nginx%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/</url>
