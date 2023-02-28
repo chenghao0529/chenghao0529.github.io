@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>mysql表结构导出</title>
+      <link href="/2023/02/28/Navicat%E5%AF%BC%E5%87%BA%E8%A1%A8%E7%BB%93%E6%9E%84%E5%88%B0excel/"/>
+      <url>/2023/02/28/Navicat%E5%AF%BC%E5%87%BA%E8%A1%A8%E7%BB%93%E6%9E%84%E5%88%B0excel/</url>
+      
+        <content type="html"><![CDATA[<h3 id="Navicat导出指定列表结构到excel"><a href="#Navicat导出指定列表结构到excel" class="headerlink" title="Navicat导出指定列表结构到excel"></a>Navicat导出指定列表结构到excel</h3><p>利用mysql自带的information_schema库里面的COLUMNS表信息。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">TABLE_NAME 表名,</span><br><span class="line">COLUMN_NAME 列名,</span><br><span class="line">COLUMN_TYPE 类型,</span><br><span class="line">IS_NULLABLE 是否允许为空, </span><br><span class="line">COLUMN_DEFAULT 默认值,</span><br><span class="line">COLUMN_COMMENT 备注</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">information_schema.`COLUMNS`</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">TABLE_SCHEMA <span class="operator">=</span> <span class="string">&#x27;数据库名&#x27;</span></span><br></pre></td></tr></table></figure><hr><p>利用navicat导出向导，导出查询的结果即可。</p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230228154453.png"></p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> mysql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>linux Nginx开机自启动</title>
       <link href="/2023/02/26/linux%20Nginx%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/"/>
       <url>/2023/02/26/linux%20Nginx%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/</url>
