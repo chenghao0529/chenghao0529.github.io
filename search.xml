@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>前端请求服务器接口504,调整nginx配置</title>
+      <link href="/2023/03/06/nginx%20%E8%AF%B7%E6%B1%82%E8%B6%85%E6%97%B6504/"/>
+      <url>/2023/03/06/nginx%20%E8%AF%B7%E6%B1%82%E8%B6%85%E6%97%B6504/</url>
+      
+        <content type="html"><![CDATA[<h3 id="nginx出现504错误的原因分析及解决"><a href="#nginx出现504错误的原因分析及解决" class="headerlink" title="nginx出现504错误的原因分析及解决"></a>nginx出现504错误的原因分析及解决</h3><h4 id="1-出现原因："><a href="#1-出现原因：" class="headerlink" title="1 出现原因："></a>1 出现原因：</h4><p>线上环境使用的是nginx代理到后端应用， 最近出现了一次导出2010年到2023年全部数据的出现了504，即网关超时（Gateway Time-out）错误。 正常情况下，是由于请求服务器超时引起。</p><p>通常有以下几种原因</p><ol><li><p>程序处理大量数据，导致等待超时。nginx默认是60s超时，而后端处理超过60s、</p></li><li><p>程序调用外部请求，而外部响应慢或者超时。</p></li><li><p>代码质量问题，可能有慢sql，循环查询数据库等问题。</p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230306110204.png"></p></li></ol><hr><h3 id="2-解决办法"><a href="#2-解决办法" class="headerlink" title="2 解决办法"></a>2 解决办法</h3><p>1  解决代码里面的问题，修改代码才是王道！</p><p>2 可以适当配置下nginx调大proxy的相关超时时间，给后端应用多一点的处理时间， 但这时间不是越大越好，如果后端程序要很久才将结果返回nginx，说明程序还是需要优化。但可以先解决问题。</p><p>在nginx.conf的server的location里面新增以下配置，修改超时时间,重启nginx</p><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 调整到600s</span></span><br><span class="line"><span class="attr">proxy_connect_timeout</span>    <span class="string">600;  #nginx跟后端服务器连接超时时间(代理连接超时)默认60s</span></span><br><span class="line"><span class="attr">proxy_read_timeout</span>       <span class="string">600; #后端服务器数据回传时间(代理发送超时)默认值60s</span></span><br><span class="line"><span class="attr">proxy_send_timeout</span>       <span class="string">600;  #连接成功后，后端服务器响应时间(代理接收超时)默认值60s</span></span><br></pre></td></tr></table></figure><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230306112839.png"></p><hr><h4 id="重新验证相同请求"><a href="#重新验证相同请求" class="headerlink" title="重新验证相同请求"></a>重新验证相同请求</h4><p>验证成功。</p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230306112723.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>java8 reduce</title>
       <link href="/2023/03/05/java8%20reduce%E7%94%A8%E6%B3%95/"/>
       <url>/2023/03/05/java8%20reduce%E7%94%A8%E6%B3%95/</url>
