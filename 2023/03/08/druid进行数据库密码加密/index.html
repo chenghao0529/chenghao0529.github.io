@@ -153,8 +153,7 @@
 
 <hr>
 <h4 id="修改应用配置文件"><a href="#修改应用配置文件" class="headerlink" title="修改应用配置文件"></a>修改应用配置文件</h4><p><strong>application.properties文件修改</strong></p>
-<p>将输出的密码密文配置到后台应用的application.properties文件的jdbc.password属性，增加jdbc.password.</p>
-<p>publicKey属性，将生成的publickey值配置进来。</p>
+<p>将输出的密码密文配置到后台应用的application.properties文件的jdbc.password属性，增加jdbc.password.publicKey属性，将生成的publickey值配置进来。</p>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#master</span></span><br><span class="line"><span class="attr">jdbc.master.driver</span>=<span class="string">net.sf.log4jdbc.DriverSpy</span></span><br><span class="line"><span class="attr">jdbc.master.url</span>=<span class="string">jdbc:log4jdbc:mysql://localhost:3306/demo1?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;allowMultiQueries=true&amp;useAffectedRows=true&amp;rewriteBatchedStatements=true</span></span><br><span class="line"><span class="attr">jdbc.master.username</span>=<span class="string">root</span></span><br><span class="line"><span class="attr">jdbc.master.password</span>=<span class="string">dovOo+twaFf7xRBlDY0DEBBWb08dcrrbLn5EeBCNGtJ7P05kbyGCWrxV1cKCSZDqhqG2/LDP6KA6dtvQ/SDvyw==</span></span><br><span class="line"><span class="attr">jdbc.password.publicKey</span>=<span class="string">MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKA17o8QnuZU7Q0kA044cpoWcYqdt4r8pnjG16iKCt+dTLiYe1MOXgQcMAPkSLncywuXzW9NX46/RDDMjusjnAMCAwEAAQ==</span></span><br></pre></td></tr></table></figure>
 
 <p> <strong>spring-datasource.xml文件修改</strong></p>
