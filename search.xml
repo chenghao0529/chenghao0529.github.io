@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>git stash 使用</title>
+      <link href="/2023/05/07/git%20stash%E7%9A%84%E5%AE%9E%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+      <url>/2023/05/07/git%20stash%E7%9A%84%E5%AE%9E%E7%94%A8%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<h3 id="git-stash-的使用"><a href="#git-stash-的使用" class="headerlink" title="git stash 的使用"></a>git stash 的使用</h3><h4 id="1-背景"><a href="#1-背景" class="headerlink" title="1 背景"></a>1 背景</h4><p>        使用git 协同开发过程中我们需要经常切换分支，比如正在某一个分支下做需求时候，在该需求还未完成时就需要在另外一个分支下进行问题的修改，如果直接 checkout 切换分支会有冲突，会导致切换不成功，但是又不想将当前的做的修改复原，于是想到将当前的改动暂时保存下来，然后切换到另外一个分支去修改问题，当问题修改完成了之后将分支切换回来，然后再将之前保存的改动释放即可继续对需求进行开发了。</p><hr><h4 id="2-使用"><a href="#2-使用" class="headerlink" title="2 使用"></a>2 使用</h4><h5 id="2-1-存储当前分支下的所有改动（git-stash）"><a href="#2-1-存储当前分支下的所有改动（git-stash）" class="headerlink" title="2.1 存储当前分支下的所有改动（git stash）"></a>2.1 存储当前分支下的所有改动（git stash）</h5><p>如在当前的开发分支，修改了一些配置项进行测试的时候，忽然有个紧急的bug要修复，这个时候就需要利用git stash命令。<img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230506171115.png"></p><pre><code>如图上所示 ，使用 git status 看到当前修改了配置文件，若要将该修改保存下来，直接使用 git stash 命令就可以了。如果想要 给当前压栈存储的修改添加说明信息（如果没有指定信息，则说明信息为最新的 commit 信息)，使用 git stash -m &quot;存储的信息&quot;，引号内为该次存储的命名。如下图所示：![](https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230506171420.png)</code></pre><h5 id="2-2-查看所有的存储列表（git-stash-list-）"><a href="#2-2-查看所有的存储列表（git-stash-list-）" class="headerlink" title="2.2 查看所有的存储列表（git stash list ）"></a>2.2 查看所有的存储列表（git stash list ）<img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230506171915.png"></h5><p>如上图所示，stash@{0} 和 stash@{1} 分别是两次保存的修改，stash@{0} 是最新的一次提交。</p><h5 id="2-3-git-stash-pop"><a href="#2-3-git-stash-pop" class="headerlink" title="2.3 git stash pop"></a>2.3 git stash pop</h5><p>释放最近一次保存的内容，并且将该次保存的内容出栈（即将栈顶出栈，释放最近一次保存的内容后将该次保存内容删除）（git stash pop） 如果要应用并删除其他stash，命令：git stash pop stash@{$num} ，比如应用并删除第二个：git stash pop stash@{1}<img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230506172322.png"></p><p>如上图所示，将最近一次存储释放之后，使用 git stash list 查看存储列表，已经由原来的两条存储变成了一条。</p><h5 id="2-4-应用某一次的存储内容，但不删除改内容（即该存储的内容还是存储在栈内-git-apply）"><a href="#2-4-应用某一次的存储内容，但不删除改内容（即该存储的内容还是存储在栈内-git-apply）" class="headerlink" title="2.4 应用某一次的存储内容，但不删除改内容（即该存储的内容还是存储在栈内  git apply）"></a>2.4 应用某一次的存储内容，但不删除改内容（即该存储的内容还是存储在栈内  git apply）</h5><p>例如 ： git stash apply stash@{0}</p><p>就是将存储号为 stash@{0} 的存储内容释放出来，但是该存储还是被存储在栈内，没有被删除。<img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230506172801.png"></p><h5 id="2-5查看某一个压栈修改了哪几个文件（git-stash-show-stash-）具体修改加上-p参数"><a href="#2-5查看某一个压栈修改了哪几个文件（git-stash-show-stash-）具体修改加上-p参数" class="headerlink" title="2.5查看某一个压栈修改了哪几个文件（git stash show stash@ ）具体修改加上-p参数"></a>2.5查看某一个压栈修改了哪几个文件（git stash show stash@ ）具体修改加上-p参数</h5><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230506173107.png"></p><p>当存储的修改过多时，你可能会忘记某次存储修改了什么文件，想要查看某次存储修改了哪些文件可以使用 git stash show stash@{0} 命令，stash@{0} 为最近存储的修改，想要看其他的存储只需要改 stash@{0} 的数字，如 stash@{5}. 如上图我是先使用 git stash list 查看存储列表，然后使用 git stash show stash@{0} 命令查看第一个修改，可以看到在最近的一次修改存储中我只修改了一个文件 test.txt。</p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>springboot项目接入cat</title>
       <link href="/2023/04/01/cat%E5%85%A5%E9%97%A8-1.3springboot%E9%A1%B9%E7%9B%AE%E6%8E%A5%E5%85%A5cat/"/>
       <url>/2023/04/01/cat%E5%85%A5%E9%97%A8-1.3springboot%E9%A1%B9%E7%9B%AE%E6%8E%A5%E5%85%A5cat/</url>
