@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>linux信息检查登记</title>
+      <link href="/2023/06/25/linux%E4%BF%A1%E6%81%AF%E6%A3%80%E6%9F%A5/"/>
+      <url>/2023/06/25/linux%E4%BF%A1%E6%81%AF%E6%A3%80%E6%9F%A5/</url>
+      
+        <content type="html"><![CDATA[<h3 id="linux信息检查登记"><a href="#linux信息检查登记" class="headerlink" title="linux信息检查登记"></a>linux信息检查登记</h3><h4 id="1-查看CPU信息"><a href="#1-查看CPU信息" class="headerlink" title="1.查看CPU信息"></a>1.查看CPU信息</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo</span><br><span class="line"></span><br><span class="line">在/proc/cpuinfo文件中，你可以找到有关CPU的详细信息。以下是一些常见的字段及其含义：</span><br><span class="line">vendor_id: CPU供应商的标识符，如&quot;AuthenticAMD&quot;表示AMD，&quot;GenuineIntel&quot;表示Intel。</span><br><span class="line">model name: CPU的型号和名称。</span><br><span class="line">cpu MHz: CPU的时钟频率。</span><br><span class="line">cache size: CPU的缓存大小。</span><br><span class="line">physical id: 物理CPU的标识符，当系统有多个物理CPU时有用。</span><br><span class="line">siblings: 每个物理CPU中的逻辑核心数量。</span><br><span class="line">cores: 每个物理CPU中的物理核心数量。</span><br><span class="line">flags: CPU的功能标志，例如支持的指令集（如SSE、AVX）、虚拟化支持等。</span><br><span class="line">这些信息对于了解CPU的型号、频率、核心数量以及其他特性非常有用。可以根据这些信息来评估服务器的性能和功能。</span><br></pre></td></tr></table></figure><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230529224342.png"></p><hr><h4 id="2-查看内存信息"><a href="#2-查看内存信息" class="headerlink" title="2.查看内存信息"></a>2.查看内存信息</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/meminfo</span><br></pre></td></tr></table></figure><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230529224605.png"></p><p>或者</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ free -h</span><br><span class="line">              total        used        free      shared  buff/cache   available</span><br><span class="line">Mem:           7.8G        3.1G        2.1G        784M        2.6G        3.9G</span><br><span class="line">Swap:          2.0G        388M        1.6G</span><br></pre></td></tr></table></figure><p>在这个示例中，<code>total</code>表示总内存大小，<code>used</code>表示已使用的内存大小，<code>free</code>表示可用的空闲内存大小。<code>-h</code>参数会自动将大小转换为易读的单位，例如使用 <code>G</code>表示GB。</p><p>请注意，<code>free</code>命令默认显示的是物理内存，而不包括缓存和缓冲区的部分。如果你想查看包括缓存和缓冲区的内存使用情况，可以关注 <code>buff/cache</code>字段。</p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230529224819.png"></p><hr><h4 id="3查看硬盘大小"><a href="#3查看硬盘大小" class="headerlink" title="3查看硬盘大小"></a>3查看硬盘大小</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure><hr><h4 id="4-查看操作系统"><a href="#4-查看操作系统" class="headerlink" title="4.查看操作系统"></a>4.查看操作系统</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostnamectl</span><br></pre></td></tr></table></figure><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230529225130.png"></p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>git stash 使用</title>
       <link href="/2023/05/07/git%20stash%E7%9A%84%E5%AE%9E%E7%94%A8%E6%96%B9%E6%B3%95/"/>
       <url>/2023/05/07/git%20stash%E7%9A%84%E5%AE%9E%E7%94%A8%E6%96%B9%E6%B3%95/</url>
@@ -421,6 +446,31 @@
         <tags>
             
             <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mybatis中if else的实现</title>
+      <link href="/2023/02/19/Mybatis%E4%B8%ADif%20else%E7%9A%84%E5%AE%9E%E7%8E%B0/"/>
+      <url>/2023/02/19/Mybatis%E4%B8%ADif%20else%E7%9A%84%E5%AE%9E%E7%8E%B0/</url>
+      
+        <content type="html"><![CDATA[<h3 id="Mybatis中if-else的实现"><a href="#Mybatis中if-else的实现" class="headerlink" title="Mybatis中if else的实现"></a>Mybatis中if else的实现</h3><p>首先在mybatis语法中是没有 if else写法得，如果需要使用则可以用choose when的语法代替</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>choose<span class="operator">&gt;</span></span><br><span class="line">       <span class="operator">&lt;</span><span class="keyword">when</span> test<span class="operator">=</span>&quot;params!=null&quot;<span class="operator">&gt;</span></span><br><span class="line">               <span class="keyword">right</span> <span class="keyword">JOIN</span></span><br><span class="line">        <span class="operator">&lt;</span><span class="operator">/</span><span class="keyword">when</span><span class="operator">&gt;</span></span><br><span class="line">        <span class="operator">&lt;</span>otherwise<span class="operator">&gt;</span></span><br><span class="line">               <span class="keyword">LEFT</span> <span class="keyword">JOIN</span></span><br><span class="line">        <span class="operator">&lt;</span><span class="operator">/</span>otherwise<span class="operator">&gt;</span></span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span>choose<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> mybatis </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mybatis </tag>
             
         </tags>
       
