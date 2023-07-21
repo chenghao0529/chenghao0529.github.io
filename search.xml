@@ -4,34 +4,9 @@
   
     
     <entry>
-      <title>mysql表结构导出</title>
-      <link href="/2023/07/21/Navivat%E8%A1%A8%E5%8D%A1%E6%AD%BB%E6%8E%92%E6%9F%A5/"/>
-      <url>/2023/07/21/Navivat%E8%A1%A8%E5%8D%A1%E6%AD%BB%E6%8E%92%E6%9F%A5/</url>
-      
-        <content type="html"><![CDATA[<p>Navicat 卡住一直在执行中解决办法</p><p>现在一张表用navivat打开，发现一直卡死</p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230531143822.png"></p><hr><h4 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h4><p>SHOW PROCESSLIST;</p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230531143923.png"></p><p>State字段为Waiting for table metadata lock，等待表元数据锁。</p><p>若被锁住了，可以使用KILL命令，KILL后面是Id，即SHOW PROCESSLIST结果第一列的值。</p><p>KILL 40365;</p><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> mysql </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> mysql </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>ObjectProvider的使用教程</title>
-      <link href="/2023/07/21/ObjectProvider%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-      <url>/2023/07/21/ObjectProvider%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+      <link href="/2023/07/22/ObjectProvider%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+      <url>/2023/07/22/ObjectProvider%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
       
         <content type="html"><![CDATA[<h3 id="ObjectProvider的使用教程"><a href="#ObjectProvider的使用教程" class="headerlink" title="ObjectProvider的使用教程"></a>ObjectProvider的使用教程</h3><h4 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h4><p>在spring的传统开发中，我们拿bean对象，通常通过beanFactory接口里面的getBean方法获得，但是在spring4.3版本开始，为了进一步规范bean的管理机制，提供了ObjectProvider操作接口。个人感觉主要用法可以用来获得一个类型的多个对象，替代@Autowired注入一个接口，并能够获取Bean实例数组，或者转为集合类型。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ObjectProvider</span>&lt;T&gt; <span class="keyword">extends</span> <span class="title class_">ObjectFactory</span>&lt;T&gt;, Iterable&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">T <span class="title function_">getObject</span><span class="params">(Object... args)</span> <span class="keyword">throws</span> BeansException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 它实际存在时才检索bean</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Nullable</span></span><br><span class="line">T <span class="title function_">getIfAvailable</span><span class="params">()</span> <span class="keyword">throws</span> BeansException;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Return an instance (possibly shared or independent) of the object</span></span><br><span class="line"><span class="comment"> * managed by this factory.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> an instance of the bean, or &#123;<span class="doctag">@code</span> null&#125; if not available or</span></span><br><span class="line"><span class="comment"> * not unique (i.e. multiple candidates found with none marked as primary)</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> BeansException in case of creation errors</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@see</span> #getObject()</span></span><br><span class="line"><span class="comment"> * 唯一的时候获取</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Nullable</span></span><br><span class="line">T <span class="title function_">getIfUnique</span><span class="params">()</span> <span class="keyword">throws</span> BeansException; </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>]]></content>
       
@@ -46,6 +21,31 @@
         <tags>
             
             <tag> code </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Navicat卡死</title>
+      <link href="/2023/07/21/Navivat%E8%A1%A8%E5%8D%A1%E6%AD%BB%E6%8E%92%E6%9F%A5/"/>
+      <url>/2023/07/21/Navivat%E8%A1%A8%E5%8D%A1%E6%AD%BB%E6%8E%92%E6%9F%A5/</url>
+      
+        <content type="html"><![CDATA[<h3 id="Navicat-卡住一直在执行中解决办法"><a href="#Navicat-卡住一直在执行中解决办法" class="headerlink" title="Navicat 卡住一直在执行中解决办法"></a>Navicat 卡住一直在执行中解决办法</h3><p>现在一张表用navivat打开，发现一直卡死</p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230531143822.png"></p><hr><h4 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h4><p>SHOW PROCESSLIST;</p><p><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20230531143923.png"></p><p>State字段为Waiting for table metadata lock，等待表元数据锁。</p><p>若被锁住了，可以使用KILL命令，KILL后面是Id，即SHOW PROCESSLIST结果第一列的值。</p><p>KILL 40365;</p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> mysql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
             
         </tags>
       
