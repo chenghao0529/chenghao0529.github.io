@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Linux磁盘挂载</title>
+      <link href="/2024/02/22/linux%20%E7%A3%81%E7%9B%98%E6%8C%82%E8%BD%BD/"/>
+      <url>/2024/02/22/linux%20%E7%A3%81%E7%9B%98%E6%8C%82%E8%BD%BD/</url>
+      
+        <content type="html"><![CDATA[<h3 id="LINUX-磁盘挂载"><a href="#LINUX-磁盘挂载" class="headerlink" title="LINUX 磁盘挂载"></a>LINUX 磁盘挂载</h3><h5 id="1-lsblk"><a href="#1-lsblk" class="headerlink" title="1 lsblk"></a>1 lsblk</h5><p>其中，TYPE 为 disk 类型，且没有下分支的，即是没有被分区的硬盘，如下图就是sdb没有被挂载。</p><hr><h4 id="2-创建挂载目录"><a href="#2-创建挂载目录" class="headerlink" title="2 创建挂载目录"></a>2 创建挂载目录</h4><p>查看当前机器的磁盘使用情况：</p><p>df -h<br><img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20240222134546.png"></p><p>创建待挂载目录（必须是空目录）：按客户要求，挂载到/opt目录</p><p>mkdir  /opt</p><hr><h4 id="3-创建新分区"><a href="#3-创建新分区" class="headerlink" title="3 创建新分区"></a>3 创建新分区</h4><p>通过上一步，我们已经知道了新磁盘是/dev/sdb ，现在对新磁盘进行分区：</p><p>fdisk /dev/sdb n p 回车(默认值) 回车(默认值) 回车(默认值) w</p><p> <img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20240222135224.png"></p><p>创建好分区后，进行检查,可以发现sdb已经挂载好了。</p><p> <img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20240222135511.png"></p><hr><h4 id="4-格式化分区"><a href="#4-格式化分区" class="headerlink" title="4 格式化分区"></a>4 格式化分区</h4><p>根据你的需求，选择一个文件系统格式进行格式化，例如 ext4。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfs.ext4 /dev/sdb1</span><br></pre></td></tr></table></figure><p> <img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20240222135822.png"></p><hr><h4 id="5-挂载硬盘"><a href="#5-挂载硬盘" class="headerlink" title="5 挂载硬盘"></a>5 挂载硬盘</h4><p>使用 <code>mount</code> 命令将硬盘挂载到目标目录</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount /dev/sdb1 /opt</span><br></pre></td></tr></table></figure><p> <img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20240222140217.png"></p><p>如果希望在系统启动时自动挂载，需要在 <code>/etc/fstab</code> 文件中添加一行，将相关信息写入该文件。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;/dev/sdb1 /opt ext4 defaults 0 0&#x27;</span> | sudo <span class="built_in">tee</span> -a /etc/fstab</span><br></pre></td></tr></table></figure><hr><h4 id="6-确认挂载"><a href="#6-确认挂载" class="headerlink" title="6 确认挂载"></a>6 确认挂载</h4><p>使用 <code>df</code> 或者lsblk 命令确认挂载是否成功。</p><p> <img src="https://blogchenghao.oss-cn-shanghai.aliyuncs.com/picture/20240222140432.png"></p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ObjectProvider的使用教程</title>
       <link href="/2023/07/22/ObjectProvider%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
       <url>/2023/07/22/ObjectProvider%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
